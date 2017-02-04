@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sound Test</title>
+    <link rel="stylesheet" href="combstyles.css">
+</head>
+<body>
+<header class=page-header>Хедер</header>
+<div class="page">
+    <div class="settingsText">Sphere radius<br>Number of elements<br>Speed<br>Volume
+    </div>
+        <div class="settingsRange">
+            <input title="Sphere Radius" class="Volume" type="range" min="0" max="0.5" step="0.01" value="0.2" id="volume"><br>
+            <input title="Number of elements" class="Volume" type="range" min="0" max="0.5" step="0.01" value="0.2" id="volume"><br>
+            <input title="Speed" class="Volume" type="range" min="0" max="0.5" step="0.01" value="0.2"><br>
+            <input title="Volume" class="Volume" type="range" min="0" max="0.5" step="0.01" value="0.2" id="volume"><br>
+        </div><br>
+
+    <div class="sortPlace">
+        <canvas id="canvas" width="700" height="700"></canvas>
+    </div>
+    <button onclick="initSort()">Start</button>
+    <button onclick="" class="StopButton">Reset</button>
+</div>
+<footer class=page-footer>Футер</footer>
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script src="combSortScript.js"></script>
+</body>
+</html>
