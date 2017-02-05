@@ -4,6 +4,7 @@ var colors = ["#839192", "#80ffbf", "#566573", "#ff8080", "#00cc00", "#006600", 
 var time = 0;
 var arrayLevel = 0;
 var colorPick = 1;
+var step=0;
 
 // VISUAL VARIABLE 4 CHANGE (OPENING <CANVAS> WINDOW WITH AN ANIMATION, WITHIN HTML LAYOUT REQ JQUERY)
 var canvasSize = 900;
@@ -12,13 +13,21 @@ var speed = 30;
 // END BLOCK;
 var volControl = document.getElementById("volume");
 var buttonStart = document.getElementsByClassName("StartButton");
-
 var array = [];
-for (var i = 0; i < numberOfElements; i++) {
-    array.push(i*(1/numberOfElements)*canvasSize*0.36+10);
-}
 
-var step = array.length-2;
+var calcArray = function() {
+    for (var i = 0; i < numberOfElements; i++) {
+        array.push(i*(1/numberOfElements)*canvasSize*0.36+10);
+    }
+    var compareRandom = function() {
+        return Math.random() - 0.5;
+    };
+    array.sort(compareRandom);
+    step = array.length-2;
+};
+
+calcArray();
+
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
@@ -53,11 +62,6 @@ var drawCircle = function(radius, fillColor) {
     ctx.stroke();
     ctx.fill();
 };
-
-var compareRandom = function() {
-    return Math.random() - 0.5;
-};
-array.sort(compareRandom);
 
 var lineFunction = function(pommel, radCord, color, radius) {
     ctx.strokeStyle = color;
@@ -144,9 +148,8 @@ var terminateProgramm = function () {
     var id2 = setInterval(function() {
         if (i < array.length) {
             startOsc(array[i]);
-
-            lineFunction(false, i, colors[1]);
-            lineFunction(true, i, colors[5]);
+            lineFunction(false, i, colors[1], +document.getElementById("sphereRadius").value);
+            lineFunction(true, i, colors[5], +document.getElementById("sphereRadius").value);
         } else {
             drawCircle(+document.getElementById("sphereRadius").value, "#b3ffcc");
             clearInterval(id2);
