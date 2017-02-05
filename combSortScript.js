@@ -6,8 +6,7 @@ var arrayLevel = 0;
 var colorPick = 1;
 
 // VISUAL VARIABLE 4 CHANGE (OPENING <CANVAS> WINDOW WITH AN ANIMATION, WITHIN HTML LAYOUT REQ JQUERY)
-var canvasSize = 700;
-var radius = canvasSize*0.07;
+var canvasSize = 900;
 var numberOfElements = 60;
 var speed = 30;
 // END BLOCK;
@@ -60,7 +59,7 @@ var compareRandom = function() {
 };
 array.sort(compareRandom);
 
-var lineFunction = function(pommel, radCord, color) {
+var lineFunction = function(pommel, radCord, color, radius) {
     ctx.strokeStyle = color;
     if (pommel) {
         ctx.strokeStyle = colors[2];
@@ -77,13 +76,13 @@ var lineFunction = function(pommel, radCord, color) {
 };
 
 var drawArray = function(array) {
-    ctx.lineWidth = 2*Math.PI*radius/array.length;
+    ctx.lineWidth = 2*Math.PI*(+document.getElementById("sphereRadius").value)/array.length;
 
     for (var i = 0; i < array.length; i++) {
-        lineFunction(false, i, colors[0]);
-        lineFunction(false, time, colors[colorPick]);
-        lineFunction(false, time+step, colors[colorPick]);
-        lineFunction(true, i, colors[2]);
+        lineFunction(false, i, colors[0], +document.getElementById("sphereRadius").value);
+        lineFunction(false, time, colors[colorPick], +document.getElementById("sphereRadius").value);
+        lineFunction(false, time+step, colors[colorPick], +document.getElementById("sphereRadius").value);
+        lineFunction(true, i, colors[2], +document.getElementById("sphereRadius").value);
     }
 };
 
@@ -106,7 +105,7 @@ var sort = function () {  // comb sort code & conditions
         startOsc(array[time+step]);
         startOsc(array[time]);
         ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
-        drawCircle(radius, colors[6]);
+        drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
         drawArray(array);
 
         if (array[time] > array[time+step]) {
@@ -135,11 +134,11 @@ var terminateProgramm = function () {
     colorPick = 3;
     clearInterval(drawing);
     ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
-    drawCircle(radius);
-    ctx.lineWidth = 2 * Math.PI * radius / array.length;
+    drawCircle(+document.getElementById("sphereRadius").value);
+    ctx.lineWidth = 2 * Math.PI * (+document.getElementById("sphereRadius").value) / array.length;
     for (var i = 0; i < array.length; i++) {
-        lineFunction(false, i, colors[0]);
-        lineFunction(true, i, colors[2]);
+        lineFunction(false, i, colors[0], +document.getElementById("sphereRadius").value);
+        lineFunction(true, i, colors[2], +document.getElementById("sphereRadius").value);
     }
     i = 0;
     var id2 = setInterval(function() {
@@ -149,7 +148,7 @@ var terminateProgramm = function () {
             lineFunction(false, i, colors[1]);
             lineFunction(true, i, colors[5]);
         } else {
-            drawCircle(radius, "#b3ffcc");
+            drawCircle(+document.getElementById("sphereRadius").value, "#b3ffcc");
             clearInterval(id2);
             $("#terminate").append("<p><b>ARRAY SORT FINISHED! " + array.length + " ELEMENTS WAS SORTED</b></p>"); // Program shutdown!
         }
