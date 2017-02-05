@@ -1,5 +1,7 @@
 // global vars
 var audio = new (window.AudioContext || window.webkitAudioContext)();
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
 var colors = ["#839192", "#80ffbf", "#566573", "#ff8080", "#00cc00", "#006600", "#c2d6d6"];
 var time = 0;
 var arrayLevel = 0;
@@ -12,10 +14,10 @@ var numberOfElements = 60;
 var speed = 30;
 // END BLOCK;
 var volControl = document.getElementById("volume");
-var buttonStart = document.getElementsByClassName("StartButton");
 var array = [];
 
-var calcArray = function() {
+var calcNewArray = function() {
+    array=[];
     for (var i = 0; i < numberOfElements; i++) {
         array.push(i*(1/numberOfElements)*canvasSize*0.36+10);
     }
@@ -26,10 +28,14 @@ var calcArray = function() {
     step = array.length-2;
 };
 
-calcArray();
+calcNewArray();
 
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
+
+var constructImage = setInterval(function() {
+    ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
+    drawArray(array);
+}
+, 150);
 
 var startOsc = function (freq) {
     var attack = 25,
@@ -127,9 +133,8 @@ var sort = function () {  // comb sort code & conditions
 };
 var drawing = 0;
 
-
-
 var initSort = function () {
+    clearInterval(constructImage);
     drawing = setInterval(sort, speed); // visual speed || code repeat interval
 };
 
@@ -153,9 +158,25 @@ var terminateProgramm = function () {
         } else {
             drawCircle(+document.getElementById("sphereRadius").value, "#b3ffcc");
             clearInterval(id2);
-            $("#terminate").append("<p><b>ARRAY SORT FINISHED! " + array.length + " ELEMENTS WAS SORTED</b></p>"); // Program shutdown!
+            // Program shutdown!
         }
         i++;
     }, speed*0.5); // Last green-style speed
 
+};
+
+var resetArray = function () {
+    ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
+    calcNewArray();
+    drawArray(array);
+};
+
+var startButton = function() {
+    if (document.getElementById("StartButton").value == "Play") {
+        document.getElementById("StartButton").value = "Pause ";
+        initSort();
+    } else {
+        clearInterval(drawing);
+        document.getElementById("StartButton").value = "Play";
+    }
 };

@@ -6,6 +6,7 @@
 </head>
 <body>
 <header class=page-header>Head</header>
+
 <div class="page">
     <div class="settingsText">Sphere radius<br>Number of elements<br>Speed<br>Volume
     </div>
@@ -18,8 +19,8 @@
     <div class="sortPlace">
         <canvas id="canvas" width="900" height="900"></canvas>
     </div>
-    <button onclick="initSort()">Start</button>
-    <button onclick="" class="StopButton">Reset</button>
+    <input value="Play" type="button" onclick="startButton()" id="StartButton"><br><br>
+    <input value="Pause" type="button" onclick="resetArray()">
 </div>
 <footer class=page-footer>Футер</footer>
 </body>
