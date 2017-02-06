@@ -12,18 +12,19 @@ var drawing = 0;
 
 // VISUAL VARIABLE 4 CHANGE
 var canvasSize = 900;
-var numberOfElements = 60;
 var speed = 30;
 // END BLOCK;
 var volControl = document.getElementById("volume");
 var array = [];
 var constructImage;
 
+ctx.strokeRect(1,1,899,899);
 function resetButton() {
     ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
     calcNewArray();
     drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
     drawArray(array);
+    resetImage();
 }
 
 function startButton() {
@@ -32,29 +33,31 @@ function startButton() {
         initSort();
     } else {
         clearInterval(drawing);
+        resetImage();
         document.getElementById("StartButton").value = "Play";
     }
 }
 
 calcNewArray();
+resetImage();
 
-constructImage = setInterval(function() {
-        ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
-        drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
-        drawArray(array);
-    }
-    , 25);
+function resetImage () {
+    ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
+    drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
+    drawArray(array);
+        }
 
 function calcNewArray() {
     array=[];
-    for (var i = 0; i < numberOfElements; i++) {
-        array.push(i*(1/numberOfElements)*canvasSize*0.36+10);
+    for (var i = 0; i < +document.getElementById("elementsNumb").value; i++) {
+        array.push(i*(1/(+document.getElementById("elementsNumb").value))*canvasSize*0.26+70);
     }
     var compareRandom = function() {
         return Math.random() - 0.5;
     };
     array.sort(compareRandom);
     step = array.length-2;
+    resetImage();
 }
 
 function startOsc(freq) {
@@ -127,7 +130,7 @@ function sort() {  // comb sort code & conditions
         step = (step == 1) ? step : Math.floor(step / 1.25);
     }
     if (arrayLevel > array.length*2) {
-        terminateProgramm();
+        terminateProgram();
     }
     for (var i = 0; i < array.length-1; i++) {
         if (array[i] <= array[i+step]) {
@@ -158,7 +161,7 @@ function sort() {  // comb sort code & conditions
 }
 
 // Last green loop and shutdown
-function terminateProgramm() {
+function terminateProgram() {
     colorPick = 3;
     arrayLevel = 0;
     clearInterval(drawing);

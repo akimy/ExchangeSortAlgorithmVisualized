@@ -11,8 +11,8 @@
     <div class="settingsText">Sphere radius<br>Number of elements<br>Speed<br>Volume
     </div>
         <div class="settingsRange">
-            <input title="Sphere Radius" class="Volume" type="range" min="40" max="100" step="1" value="40" id="sphereRadius"><br><br>
-            <input title="Number of elements" class="Volume" type="range" min="5" max="100" step="11" value="5" id="elementsNumb"><br><br>
+            <input title="Sphere Radius" class="Volume" type="range" min="40" max="100" step="1" value="40" oninput="resetImage()"id="sphereRadius"><br><br>
+            <input title="Number of elements" class="Volume" type="range" min="10" max="100" step="1" value="5" oninput="calcNewArray()" id="elementsNumb"><br><br>
             <input title="Speed" class="Volume" type="range" min="30" max="200" step="1" value="85" id="codeSpeed"><br><br>
             <input title="Volume" class="Volume" type="range" min="0" max="0.5" step="0.01" value="0.25" id="volume"><br>
         </div><br>
@@ -20,10 +20,9 @@
         <canvas id="canvas" width="900" height="900"></canvas>
     </div>
     <input value="Play" type="button" onclick="startButton()" id="StartButton"><br><br>
-    <input value="Pause" type="button" onclick="resetButton()">
+    <input value="Reset" type="button" onclick="resetButton()">
 </div>
 <footer class=page-footer>Футер</footer>
 </body>
-<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
 <script src="combSortScript.js"></script>
 </html>
