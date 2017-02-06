@@ -7,16 +7,45 @@ var time = 0;
 var arrayLevel = 0;
 var colorPick = 1;
 var step=0;
+// Interval ID's
+var drawing = 0;
 
-// VISUAL VARIABLE 4 CHANGE (OPENING <CANVAS> WINDOW WITH AN ANIMATION, WITHIN HTML LAYOUT REQ JQUERY)
+// VISUAL VARIABLE 4 CHANGE
 var canvasSize = 900;
 var numberOfElements = 60;
 var speed = 30;
 // END BLOCK;
 var volControl = document.getElementById("volume");
 var array = [];
+var constructImage;
 
-var calcNewArray = function() {
+function resetButton() {
+    ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
+    calcNewArray();
+    drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
+    drawArray(array);
+}
+
+function startButton() {
+    if (document.getElementById("StartButton").value == "Play") {
+        document.getElementById("StartButton").value = "Pause ";
+        initSort();
+    } else {
+        clearInterval(drawing);
+        document.getElementById("StartButton").value = "Play";
+    }
+}
+
+calcNewArray();
+
+constructImage = setInterval(function() {
+        ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
+        drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
+        drawArray(array);
+    }
+    , 25);
+
+function calcNewArray() {
     array=[];
     for (var i = 0; i < numberOfElements; i++) {
         array.push(i*(1/numberOfElements)*canvasSize*0.36+10);
@@ -26,18 +55,9 @@ var calcNewArray = function() {
     };
     array.sort(compareRandom);
     step = array.length-2;
-};
-
-calcNewArray();
-
-
-var constructImage = setInterval(function() {
-    ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
-    drawArray(array);
 }
-, 150);
 
-var startOsc = function (freq) {
+function startOsc(freq) {
     var attack = 25,
         decay = 50,
         gain = audio.createGain(),
@@ -57,9 +77,9 @@ var startOsc = function (freq) {
         osc.disconnect(gain);
         gain.disconnect(audio.destination);
     }, decay);
-};
+}
 
-var drawCircle = function(radius, fillColor) {
+function drawCircle(radius, fillColor) {
     ctx.strokeStyle = "#273746";
     ctx.lineWidth = 5;
     ctx.fillStyle = fillColor;
@@ -67,9 +87,20 @@ var drawCircle = function(radius, fillColor) {
     ctx.arc(canvasSize/2, canvasSize/2, radius, Math.PI*2, 0);
     ctx.stroke();
     ctx.fill();
-};
+}
 
-var lineFunction = function(pommel, radCord, color, radius) {
+function drawArray(array) {
+    ctx.lineWidth = 2*Math.PI*(+document.getElementById("sphereRadius").value)/array.length;
+
+    for (var i = 0; i < array.length; i++) {
+        lineFunction(false, i, colors[0], +document.getElementById("sphereRadius").value);
+        lineFunction(false, time, colors[colorPick], +document.getElementById("sphereRadius").value);
+        lineFunction(false, time+step, colors[colorPick], +document.getElementById("sphereRadius").value);
+        lineFunction(true, i, colors[2], +document.getElementById("sphereRadius").value);
+    }
+}
+
+function lineFunction(pommel, radCord, color, radius) {
     ctx.strokeStyle = color;
     if (pommel) {
         ctx.strokeStyle = colors[2];
@@ -83,20 +114,14 @@ var lineFunction = function(pommel, radCord, color, radius) {
         ctx.lineTo(Math.cos(radCord*(Math.PI*2/array.length))*(radius+array[radCord])+canvasSize/2, Math.sin(radCord*(Math.PI*2/array.length))*(radius+array[radCord])+canvasSize/2);
         ctx.stroke();
     }
-};
+}
 
-var drawArray = function(array) {
-    ctx.lineWidth = 2*Math.PI*(+document.getElementById("sphereRadius").value)/array.length;
+function initSort() {
+    clearInterval(constructImage);
+    drawing = setInterval(sort, speed); // visual speed || code repeat interval
+}
 
-    for (var i = 0; i < array.length; i++) {
-        lineFunction(false, i, colors[0], +document.getElementById("sphereRadius").value);
-        lineFunction(false, time, colors[colorPick], +document.getElementById("sphereRadius").value);
-        lineFunction(false, time+step, colors[colorPick], +document.getElementById("sphereRadius").value);
-        lineFunction(true, i, colors[2], +document.getElementById("sphereRadius").value);
-    }
-};
-
-var sort = function () {  // comb sort code & conditions
+function sort() {  // comb sort code & conditions
     if (time + step >= array.length) {
         time = 0;
         step = (step == 1) ? step : Math.floor(step / 1.25);
@@ -130,17 +155,12 @@ var sort = function () {  // comb sort code & conditions
 
     } else {
         time = 0;}
-};
-var drawing = 0;
-
-var initSort = function () {
-    clearInterval(constructImage);
-    drawing = setInterval(sort, speed); // visual speed || code repeat interval
-};
+}
 
 // Last green loop and shutdown
-var terminateProgramm = function () {
+function terminateProgramm() {
     colorPick = 3;
+    arrayLevel = 0;
     clearInterval(drawing);
     ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
     drawCircle(+document.getElementById("sphereRadius").value);
@@ -158,25 +178,9 @@ var terminateProgramm = function () {
         } else {
             drawCircle(+document.getElementById("sphereRadius").value, "#b3ffcc");
             clearInterval(id2);
+            document.getElementById("StartButton").value = "Play";
             // Program shutdown!
         }
         i++;
     }, speed*0.5); // Last green-style speed
-
-};
-
-var resetArray = function () {
-    ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
-    calcNewArray();
-    drawArray(array);
-};
-
-var startButton = function() {
-    if (document.getElementById("StartButton").value == "Play") {
-        document.getElementById("StartButton").value = "Pause ";
-        initSort();
-    } else {
-        clearInterval(drawing);
-        document.getElementById("StartButton").value = "Play";
-    }
-};
+}
