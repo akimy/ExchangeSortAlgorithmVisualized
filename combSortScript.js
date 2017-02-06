@@ -7,6 +7,7 @@ var time = 0;
 var arrayLevel = 0;
 var colorPick = 1;
 var step=0;
+var rangechange = 0;
 // Interval ID's
 var drawing = 0;
 
@@ -16,7 +17,6 @@ var speed = 30;
 // END BLOCK;
 var volControl = document.getElementById("volume");
 var array = [];
-var constructImage;
 
 ctx.strokeRect(1,1,899,899);
 function resetButton() {
@@ -82,6 +82,8 @@ function startOsc(freq) {
     }, decay);
 }
 
+// document.getElementById("myRange").disabled = true;
+
 function drawCircle(radius, fillColor) {
     ctx.strokeStyle = "#273746";
     ctx.lineWidth = 5;
@@ -120,7 +122,6 @@ function lineFunction(pommel, radCord, color, radius) {
 }
 
 function initSort() {
-    clearInterval(constructImage);
     drawing = setInterval(sort, speed); // visual speed || code repeat interval
 }
 
