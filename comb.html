@@ -9,8 +9,7 @@
 <header class = "page-header" role = "banner">Algorithm visualization</header>
 
 <div class="mainPage" role="main">
-    <div class="settingsText">
-    </div>
+    <div class="settingsPanel">
     <form>
         <select name = "sortTypeDom" onchange="changeSortType()">
             <option value = "combSort">Comb sort</option>
@@ -23,11 +22,10 @@
             <option value = "classicView">Classic view</option>
             <option value = "gradientView">Gradient view</option>
         </select>
-
     </form>
-
-
-    <input value="Play" type="button" onclick="startButton()" id="StartButton">  <input value="Reset" type="button" onclick="resetButton()">
+        <br>
+        <input value="Play" type="button" onclick="startButton()" id="StartButton"> <br>
+        <input value="Reset" type="button" onclick="resetButton()"> <br>
         <div class="settingsRange">
             Sphere Radius & Lines height / Brightness<br>
             <input title="Sphere Radius" class="rangeCSS" type="range" min="30" max="150" step="1" value="75" oninput="changeRadius()" id="sphereRadius"><br><br>
@@ -38,10 +36,21 @@
             Volume<br>
             <input title="Volume" class="rangeCSS" type="range" min="0" max="0.05" step="0.0005" value="0.025" id="volume"><br>
         </div><br>
-    <div class="sortPlace">
-        <canvas id="canvas" width="900" height="900"></canvas>
+    </div>
+    <div class="sortViewsContainer">
+        <div class="sortButton sortButtonRound"><img src="roundview.png" width="120px">
+        </div>
+        <div class="sortButton sortButtonClassic"><img src="classicview.png" width="120px">
+        </div>
+        <div class="sortButton sortButtonGradient"><img src="gradientview.png" width="120px">
+        </div>
+        <br>
+        <div class="sortPlace">
+            <canvas id="canvas" width="900" height="900"></canvas>
+        </div>
     </div>
 </div>
+
 <footer class=page-footer>
     Alexander Vaganov <br>
     Russian Federation, Ufa 2017</footer>
