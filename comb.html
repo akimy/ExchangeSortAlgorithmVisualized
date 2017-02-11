@@ -2,27 +2,49 @@
 <html>
 <head>
 <title>Sound Test</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="combstyles.css">
 </head>
 <body>
-<header class=page-header>Head</header>
+<header class = "page-header" role = "banner">Algorithm visualization</header>
 
-<div class="page">
-    <div class="settingsText">Sphere radius<br>Number of elements<br>Speed<br>Volume
+<div class="mainPage" role="main">
+    <div class="settingsText">
     </div>
+    <form>
+        <select name = "sortTypeDom" onchange="changeSortType()">
+            <option value = "combSort">Comb sort</option>
+            <option value = "bubbleSort">Bubble sort</option>
+            <option value = "cocktailSort">Cocktail sort</option>
+        </select>
+        <br>
+        <select name = "sortViewDom" onchange="changeSortType()">
+            <option value = "roundView">Round view</option>
+            <option value = "classicView">Classic view</option>
+            <option value = "gradientView">Gradient view</option>
+        </select>
+
+    </form>
+
+
+    <input value="Play" type="button" onclick="startButton()" id="StartButton">  <input value="Reset" type="button" onclick="resetButton()">
         <div class="settingsRange">
-            <input title="Sphere Radius" class="Volume" type="range" min="40" max="100" step="1" value="40" oninput="resetImage()" id="sphereRadius"><br><br>
-            <input title="Number of elements" class="Volume" type="range" min="12" max="100" step="1" value="5" oninput="calcNewArray()" id="elementsNumb"><br><br>
-            <input title="Speed" class="Volume" type="range" min="30" max="200" step="1" value="85" id="codeSpeed"><br><br>
-            <input title="Volume" class="Volume" type="range" min="0" max="0.5" step="0.01" value="0.25" id="volume"><br>
+            Sphere Radius & Lines height / Brightness<br>
+            <input title="Sphere Radius" class="rangeCSS" type="range" min="30" max="150" step="1" value="75" oninput="changeRadius()" id="sphereRadius"><br><br>
+            Number of elements<br>
+            <input title="Number of elements" class="rangeCSS" type="range" min="30" max="240" step="1" value="125" oninput="calcNewArray()" id="elementsNumb"><br><br>
+            Speed<br>
+            <input title="Speed" class="rangeCSS" type="range" min="10" max="200" step="5" value="105" oninput="changeSpeed()" id="codeSpeed"><br><br>
+            Volume<br>
+            <input title="Volume" class="rangeCSS" type="range" min="0" max="0.05" step="0.0005" value="0.025" id="volume"><br>
         </div><br>
     <div class="sortPlace">
         <canvas id="canvas" width="900" height="900"></canvas>
     </div>
-    <input value="Play" type="button" onclick="startButton()" id="StartButton"><br><br>
-    <input value="Reset" type="button" onclick="resetButton()">
 </div>
-<footer class=page-footer>Футер</footer>
+<footer class=page-footer>
+    Alexander Vaganov <br>
+    Russian Federation, Ufa 2017</footer>
 </body>
 <script src="combSortScript.js"></script>
 </html>

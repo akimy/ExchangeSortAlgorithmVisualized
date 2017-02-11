@@ -1,6 +1,8 @@
 header.page-header {
     position: relative;
+    text-align: center;
     z-index: 5;
+    width: auto;
     font-size: 26pt;
     min-height: 35px;
     padding: 20px;
@@ -11,18 +13,12 @@ header.page-header {
 
 footer.page-footer {
     min-height: 50px;
+    width: auto;
     padding: 20px;
     font-size: 14px;
-    color: black;
-    background-color: #f1c40f;
-    background-image:
-            linear-gradient(45deg, transparent 50%, white 50%),
-            linear-gradient(-45deg, transparent 50%, white 50%),
-            linear-gradient(135deg, transparent 50%, #2c3e50 50%),
-            linear-gradient(-135deg, transparent 50%, #2c3e50 50%);
-    background-repeat: repeat-x;
-    background-position: 0 0, 0 0, 0 100%, 0 100%;
-    background-size: 10px 12px;
+    color: hsl(0,0%,99%);
+    background-color: hsl(0,0%,12%);;
+
 }
 
 body {
@@ -44,97 +40,10 @@ body {
     width: 700px;
     margin: auto;
 }
-.page {
-    padding: 200px;
-    width: 70%;
+.mainPage {
+    padding: 100px;
+    width: auto;
     margin: auto;
-    background-color: #ffffff;
-}
-input {
-    margin: auto;
-    float: right;
-}
-input[type=range].Volume {
-    -webkit-appearance: none;
-    width: 30%;
-}
-input[type=range].Volume:focus {
-    outline: none;
-}
-input[type=range].Volume::-webkit-slider-runnable-track {
-    width: 30%;
-    height: 11.3px;
-    cursor: pointer;
-    box-shadow: 0.9px 0.9px 1.7px #092200, 0px 0px 0.9px #103c00;
-    background: rgba(175, 239, 183, 0.89);
-    border-radius: 1px;
-    border: 1.1px solid #286d10;
-}
-input[type=range].Volume::-webkit-slider-thumb {
-    box-shadow: 2.9px 2.9px 3.7px #04aa00, 0px 0px 2.9px #05c300;
-    border: 2.5px solid #bcdf84;
-    height: 40px;
-    width: 20px;
-    border-radius: 7px;
-    background: #3f4d43;
-    cursor: pointer;
-    -webkit-appearance: none;
-    margin-top: -15.45px;
-}
-input[type=range].Volume:focus::-webkit-slider-runnable-track {
-    background: rgba(205, 245, 210, 0.89);
-}
-input[type=range].Volume::-moz-range-track {
-    width: 30%;
-    height: 11.3px;
-    cursor: pointer;
-    box-shadow: 0.9px 0.9px 1.7px #092200, 0px 0px 0.9px #103c00;
-    background: rgba(175, 239, 183, 0.89);
-    border-radius: 1px;
-    border: 1.1px solid #286d10;
-}
-input[type=range].Volume::-moz-range-thumb {
-    box-shadow: 2.9px 2.9px 3.7px #04aa00, 0px 0px 2.9px #05c300;
-    border: 2.5px solid #bcdf84;
-    height: 40px;
-    width: 20px;
-    border-radius: 7px;
-    background: #3f4d43;
-    cursor: pointer;
-}
-input[type=range].Volume::-ms-track {
-    width: 30%;
-    height: 11.3px;
-    cursor: pointer;
-    background: transparent;
-    border-color: transparent;
-    color: transparent;
-}
-input[type=range].Volume::-ms-fill-lower {
-    background: rgba(145, 233, 156, 0.89);
-    border: 1.1px solid #286d10;
-    border-radius: 2px;
-    box-shadow: 0.9px 0.9px 1.7px #092200, 0px 0px 0.9px #103c00;
-}
-input[type=range].Volume::-ms-fill-upper {
-    background: rgba(175, 239, 183, 0.89);
-    border: 1.1px solid #286d10;
-    border-radius: 2px;
-    box-shadow: 0.9px 0.9px 1.7px #092200, 0px 0px 0.9px #103c00;
-}
-input[type=range].Volume::-ms-thumb {
-    box-shadow: 2.9px 2.9px 3.7px #04aa00, 0px 0px 2.9px #05c300;
-    border: 2.5px solid #bcdf84;
-    height: 40px;
-    width: 20px;
-    border-radius: 7px;
-    background: #3f4d43;
-    cursor: pointer;
-    height: 11.3px;
-}
-input[type=range].Volume:focus::-ms-fill-lower {
-    background: rgba(175, 239, 183, 0.89);
-}
-input[type=range].Volume:focus::-ms-fill-upper {
-    background: rgba(205, 245, 210, 0.89);
+    // background-color: #FFFFFF;
+    background:  linear-gradient(to bottom, hsla(0, 0%, 100%, 0.2), hsla(0, 0%, 100%, 1)), linear-gradient(to left, hsla(191, 100%, 86%, 1), hsla(77, 100%, 86%, 1));
 }
