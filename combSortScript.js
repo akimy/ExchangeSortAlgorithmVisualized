@@ -5,7 +5,8 @@ var audio = new (window.AudioContext || window.webkitAudioContext)();
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var volControl = document.getElementById("volume");
-
+var sortView = "roundView";
+document.getElementById("roundView").style.backgroundColor = "hsla(163, 81%, 80%, 1)";
 var colors = ["#839192", "#80ffbf", "#566573", "#ff8080", "#00cc00", "#006600", "#c2d6d6"];
 var arrayLevel = 0;
 var arrayLevelLow = 0;
@@ -26,7 +27,7 @@ resetImage();
 function resetButton() {
     ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
     calcNewArray();
-    if (document.forms[0].elements[1].value == "roundView") {
+    if (sortView == "roundView") {
         drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
     }
     drawArray(array);
@@ -51,8 +52,6 @@ function changeSpeed() {
     }
 }
 
-
-
 function changeRadius() {
     diffRadiusValue = +document.getElementById("sphereRadius").value - radiusValue;
     radiusValue = +document.getElementById("sphereRadius").value;
@@ -64,7 +63,7 @@ function changeRadius() {
 
 function resetImage () {
     ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
-    if (document.forms[0].elements[1].value == "roundView") {
+    if (sortView == "roundView") {
         drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
     }
     drawArray(array);
@@ -162,7 +161,7 @@ function drawArray(array) {
 }
 
 function lineFunction(pommel, radCord, color, radius) {
-    if (document.forms[0].elements[1].value == "roundView") {
+    if (sortView == "roundView") {
         ctx.strokeStyle = color;
         ctx.lineWidth = 2*Math.PI*(+document.getElementById("sphereRadius").value)/array.length;
         if (pommel) {
@@ -178,7 +177,7 @@ function lineFunction(pommel, radCord, color, radius) {
             ctx.stroke();
      }
     }
-    if (document.forms[0].elements[1].value == "classicView") {
+    if (sortView == "classicView") {
         ctx.strokeStyle = color;
         ctx.lineWidth = canvasSize*0.75 / array.length;
         if (pommel) {
@@ -193,7 +192,7 @@ function lineFunction(pommel, radCord, color, radius) {
             ctx.stroke();
         }
     }
-    if (document.forms[0].elements[1].value == "gradientView") {
+    if (sortView == "gradientView") {
         ctx.lineWidth = canvasSize / array.length;
         if (time > 1) {
             ctx.strokeStyle = colors[2];
@@ -262,6 +261,24 @@ function changeSortType() {
     clearInterval(drawing);
 }
 
+function changeSortView(view) {
+    document.getElementById("roundView").style.backgroundColor="";
+    document.getElementById("classicView").style.backgroundColor="";
+    document.getElementById("gradientView").style.backgroundColor="";
+
+    sortView = view;
+    if (sortView == "roundView") {
+        document.getElementById("roundView").style.backgroundColor = "hsla(163, 81%, 80%, 1)";
+    }
+    if (sortView == "classicView") {
+        document.getElementById("classicView").style.backgroundColor = "hsla(163, 81%, 80%, 1)";
+    }
+    if (sortView == "gradientView") {
+        document.getElementById("gradientView").style.backgroundColor = "hsla(163, 81%, 80%, 1)";
+    }
+    resetImage();
+}
+
 function sort() {
     ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
 
@@ -272,7 +289,7 @@ function sort() {
             colorPick = 1;
         }
         drawArray(array);
-        if (document.forms[0].elements[1].value == "roundView") {
+        if (sortView == "roundView") {
             drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
         }
         if (time + step >= array.length) { // comb sort code & conditions
@@ -313,7 +330,7 @@ function sort() {
         } else colorPick = 1;
 
         drawArray(array);
-        if (document.forms[0].elements[1].value == "roundView") {
+        if (sortView == "roundView") {
             drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
         }
 
@@ -353,7 +370,7 @@ function sort() {
 
         ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
         drawArray(array);
-        if (document.forms[0].elements[1].value == "roundView") {
+        if (sortView == "roundView") {
             drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
         }
 
@@ -416,7 +433,6 @@ function sort() {
     }
 }
 
-
 function terminateProgram() {
     clearInterval(drawing);
     ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
@@ -426,7 +442,7 @@ function terminateProgram() {
     for (var i = 0; i < array.length; i++) {
         lineFunction(false, i, colors[0], +document.getElementById("sphereRadius").value);
         lineFunction(true, i, colors[2], +document.getElementById("sphereRadius").value);
-        if (document.forms[0].elements[1].value == "roundView") {
+        if (sortView == "roundView") {
             drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
         }
     }
@@ -436,11 +452,11 @@ function terminateProgram() {
             startOsc(array[i]);
             lineFunction(false, i, colors[1], +document.getElementById("sphereRadius").value);
             lineFunction(true, i, colors[5], +document.getElementById("sphereRadius").value);
-            if (document.forms[0].elements[1].value == "roundView") {
+            if (sortView == "roundView") {
                 drawCircle(+document.getElementById("sphereRadius").value);
             }
         } else {
-            if (document.forms[0].elements[1].value == "roundView") {
+            if (sortView == "roundView") {
                 drawCircle(+document.getElementById("sphereRadius").value, "#b3ffcc");
             }
             clearInterval(finishDrawing);

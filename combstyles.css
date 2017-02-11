@@ -1,3 +1,7 @@
+.transition {
+    transition: 0.5s;
+}
+
 header.page-header {
     position: relative;
     text-align: center;
@@ -11,6 +15,12 @@ header.page-header {
     box-shadow: 0 0 5px 0 #333333;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 1000px;
+}
+
 footer.page-footer {
     min-height: 50px;
     width: auto;
@@ -22,54 +32,63 @@ footer.page-footer {
     clear:both;
 }
 
-
-.settingsPanel {
-   //  background-color: #EA2663;
-    float: left;
-    width: 20%;
-}
-.sortViewsContainer {
-    // background-color: #F9D7FF;
-    padding-right: 20px;
-    display: inline-block;
-    vertical-align: middle;
-    text-align: center;
-    float: left;
-    width: 60%;
-
-}
-.sortButton {
-    display: inline-block;
-    margin: 0 40px 0 40px;
-    padding: 0px 20px 0px 20px;
-    border: solid #839192;
-    border-radius: 20%;
-    background-color: #FAFAFA;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 1000px;
-
-}
-.settingsText {
-    width: auto;
-    float: left;
-}
-.settingsRange {
-    margin-top: 30px;
-    width: auto;
-    float: left;
-}
-
-
-.sortPlace {
-
-}
 .mainPage {
     padding: 40px;
     min-height: inherit;
 
     background: linear-gradient(to bottom, hsla(0, 0%, 100%, 0.4), hsla(0, 0%, 100%, 1)), linear-gradient(to left, hsla(191, 100%, 91%, 1), hsla(77, 100%, 91%, 1));
 }
+
+.settingsPanel {
+   /*background-color: #EA2663;*/
+    float: left;
+    width: 20%;
+}
+.sortViewsContainer {
+    /*background-color: #F9D7FF;*/
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    float: left;
+    width: 60%;
+}
+.sortButton {
+    display: inline-block;
+    margin: 0 40px 0 40px;
+    padding: 0px 20px 0px 20px;
+    border: solid #839192 4px;
+    border-radius: 20%;
+    background-color: #FAFAFA;
+}
+.sortButton:hover {
+    background-color: hsla(142, 81%, 83%, 1);
+}
+.buttonContainer {
+    margin-top: 30px;
+    /*background-color: #842844;*/
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    float: left;
+    width: 100%;
+}
+
+.button {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    top: 40px;
+    width: 50px;
+    height: 50px;
+    margin: 0 40px 0 40px;
+    padding: 0px 20px 0px 20px;
+    border: solid #839192 3px;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+}
+
+.button > img {
+    margin-top: 10px;
+}
+
