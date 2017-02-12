@@ -74,21 +74,44 @@ footer.page-footer {
 }
 
 .button {
+    background-repeat: no-repeat;
     position: relative;
     cursor: pointer;
     display: inline-block;
-    vertical-align: middle;
+
     top: 40px;
     width: 50px;
-    height: 50px;
     margin: 0 40px 0 40px;
-    padding: 0px 20px 0px 20px;
+    padding: 2px 20px 2px 20px;
     border: solid #839192 3px;
     border-radius: 5px;
     background-color: #FAFAFA;
 }
 
-.button > img {
-    margin-top: 10px;
+.sprite-fb {
+    width: 45px;
+    height: 45px;
+    background-position: -5px -5px;
 }
 
+.sprite-play {
+    display: inline-block;
+    background-image: url(spritesheet.png);
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    background-position: -60px -45px;
+}
+
+.sprite-reset {
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url(spritesheet.png);
+    width: 30px;
+    height: 30px;
+    background-position: -5px -85px;
+}
+
+.playButton {
+    box-shadow: -5px -5px 0.2em gold;
+}

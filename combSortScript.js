@@ -14,6 +14,7 @@ var colorPick = 3;
 var drawing = 0;
 var direction = true;
 var time = 0;
+var playing = false;
 var sortType ="combSort";
 var diffRadiusValue = 0;
 
@@ -35,18 +36,20 @@ function resetButton() {
 }
 
 function startButton() {
-    if (document.getElementById("StartButton").value == "Play") {
-        document.getElementById("StartButton").value = "Pause ";
+    if (!playing) {
+        playing = true;
+        document.getElementsByClassName("sprite-play")[0].style.backgroundPosition = "-60px -5px";
         initSort();
     } else {
+        playing = false;
         clearInterval(drawing);
         resetImage();
-        document.getElementById("StartButton").value = "Play";
+        document.getElementsByClassName("sprite-play")[0].style.backgroundPosition = "-60px -45px";
     }
 }
 
 function changeSpeed() {
-    if (document.getElementById("StartButton").value == "Pause ") {
+    if (playing) {
         clearInterval(drawing);
         initSort();
     }
@@ -255,7 +258,7 @@ function initSort() {
 function changeSortType() {
     clearInterval(drawing);
     resetImage();
-    document.getElementById("StartButton").value = "Play";
+    playing = true;
     resetButton();
     sortType = document.forms[0].elements[0].value;
     clearInterval(drawing);
