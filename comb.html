@@ -38,8 +38,11 @@
         <div class="sortButton transition" id = "gradientView" onclick="changeSortView('gradientView')"><img src="gradientview.png" width="120px">
         </div><br>
             <div class="buttonContainer">
-                <div class="playButton button" onclick="startButton()"><div class="sprite-play"></div></div>
-                <div class="resetButton button" onclick="resetButton()"><div class="sprite-reset"></div></div>
+                <div class="playButton button transition" id = "firstButton" onclick="startButton()">
+                    <div class="sprite-play"></div></div>
+                <div class="resetButton button transition" onclick="resetButton()">
+                    <div class="sprite-reset"></div>
+                </div>
             </div>
         <br>
         <div class="sortPlace">

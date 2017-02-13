@@ -1,5 +1,5 @@
 .transition {
-    transition: 0.5s;
+    transition: 0.4s;
 }
 
 header.page-header {
@@ -78,24 +78,23 @@ footer.page-footer {
     position: relative;
     cursor: pointer;
     display: inline-block;
-
     top: 40px;
-    width: 50px;
+    width: 70px;
     margin: 0 40px 0 40px;
-    padding: 2px 20px 2px 20px;
+    background-color: #FAFAFA;
     border: solid #839192 3px;
     border-radius: 5px;
-    background-color: #FAFAFA;
 }
 
-.sprite-fb {
-    width: 45px;
-    height: 45px;
-    background-position: -5px -5px;
-}
+/*.sprite-fb {*/
+    /*width: 45px;*/
+    /*height: 45px;*/
+    /*background-position: -5px -5px;*/
+/*}*/
 
 .sprite-play {
     display: inline-block;
+    margin: 2px 0 2px 0;
     background-image: url(spritesheet.png);
     vertical-align: middle;
     width: 30px;
@@ -106,12 +105,41 @@ footer.page-footer {
 .sprite-reset {
     display: inline-block;
     vertical-align: middle;
+    margin: 2px 0 2px 0;
     background-image: url(spritesheet.png);
     width: 30px;
     height: 30px;
     background-position: -5px -85px;
 }
 
-.playButton {
-    box-shadow: -5px -5px 0.2em gold;
+.borderMove {
+     height: 36px;
+     width: 71px;
+     position: absolute;
+     top: -3px;
+     left: -3px;
+     z-index: 2;
+     border: solid #a8b5e9 2px;
+     border-radius: 5px;
+
+ }
+/*.button:hover {*/
+    /*box-shadow: -5px -5px 0.1em #0e1b1d;*/
+/*}*/
+
+
+/*.playButton {*/
+    /*background: linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1));*/
+/*}*/
+
+
+.resetButton:active {
+    background: linear-gradient(hsla(70, 64%, 57%, 1), hsla(70, 64%, 81%, 1));
 }
+
+.resetButton {
+    background: linear-gradient(hsla(70, 64%, 87%, 1), hsla(70, 64%, 57%, 1));
+}
+
+
+

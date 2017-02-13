@@ -17,6 +17,10 @@ var time = 0;
 var playing = false;
 var sortType ="combSort";
 var diffRadiusValue = 0;
+//
+document.styleSheets[0].insertRule('#firstButton:active {' +
+    'background: linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1)); }', 0);
+document.styleSheets[0].insertRule('#firstButton {background: linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1));}', 1);
 
 // vars 4 change
 var canvasSize = 900;
@@ -40,11 +44,15 @@ function startButton() {
         playing = true;
         document.getElementsByClassName("sprite-play")[0].style.backgroundPosition = "-60px -5px";
         initSort();
+        document.styleSheets[0].cssRules[1].style.background= "linear-gradient(hsla(0, 64%, 87%, 1), hsla(0, 64%, 57%, 1))";
+        document.styleSheets[0].cssRules[0].style.background = 'linear-gradient(hsla(0, 64%, 57%, 1), hsla(0, 64%, 87%, 1))';
     } else {
         playing = false;
+        document.styleSheets[0].cssRules[1].style.background = "linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1))";
         clearInterval(drawing);
         resetImage();
         document.getElementsByClassName("sprite-play")[0].style.backgroundPosition = "-60px -45px";
+        document.styleSheets[0].cssRules[0].style.background = 'linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1))';
     }
 }
 
