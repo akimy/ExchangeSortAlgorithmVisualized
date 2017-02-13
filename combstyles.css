@@ -19,7 +19,7 @@ header.page-header {
 body {
     margin: 0;
     padding: 0;
-    min-height: 1000px;
+    position: relative;
 }
 
 footer.page-footer {
@@ -33,110 +33,6 @@ footer.page-footer {
     clear:both;
 }
 
-.mainPage {
-    padding: 40px;
-    min-height: inherit;
-
-    background: linear-gradient(to bottom, hsla(0, 0%, 100%, 0.4), hsla(0, 0%, 100%, 1)), linear-gradient(to left, hsla(191, 100%, 91%, 1), hsla(77, 100%, 91%, 1));
-}
-
-.settingsPanel {
-   /*background-color: #EA2663;*/
-    font-size: 20px;
-    position: relative;
-    top: -40px;
-    padding-top: 40px;
-    float: left;
-    width: 20%;
-    text-align: center;
-
-}
-
-.settingsPanelBox {
-    position: absolute;
-    z-index: 0;
-    top: -40px;
-    height: 1300px;
-    width: 20%;
-    box-shadow: 10px 0px 0.5em #787878;
-
-}
-.sortViewsContainer {
-    /*background-color: #F9D7FF;*/
-    display: inline-block;
-    vertical-align: middle;
-    text-align: center;
-    float: left;
-    width: 60%;
-}
-.sortButton {
-    display: inline-block;
-    margin: 0 40px 0 40px;
-    padding: 0px 20px 0px 20px;
-    border: solid #839192 4px;
-    border-radius: 20%;
-    background-color: #FAFAFA;
-}
-.sortButton:hover {
-    background-color: hsla(142, 81%, 83%, 1);
-}
-.buttonContainer {
-    margin-top: 30px;
-    /*background-color: #842844;*/
-    display: inline-block;
-    vertical-align: middle;
-    text-align: center;
-    float: left;
-    width: 100%;
-}
-
-.button {
-    background-repeat: no-repeat;
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    top: 40px;
-    width: 70px;
-    margin: 0 40px 0 40px;
-    background-color: #FAFAFA;
-    border: solid #839192 3px;
-    border-radius: 5px;
-}
-
-/*.sprite-fb {*/
-    /*width: 45px;*/
-    /*height: 45px;*/
-    /*background-position: -5px -5px;*/
-/*}*/
-
-.sprite-play {
-    display: inline-block;
-    margin: 2px 0 2px 0;
-    background-image: url(spritesheet.png);
-    vertical-align: middle;
-    width: 30px;
-    height: 30px;
-    background-position: -60px -45px;
-}
-
-.sprite-reset {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 2px 0 2px 0;
-    background-image: url(spritesheet.png);
-    width: 30px;
-    height: 30px;
-    background-position: -5px -85px;
-}
-
-/*.button:hover {*/
-    /*box-shadow: -5px -5px 0.1em #0e1b1d;*/
-/*}*/
-
-
-/*.playButton {*/
-    /*background: linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1));*/
-/*}*/
 label.label {
     display: block;
     font-family: Verdana, Geneva, sans-serif;
@@ -156,10 +52,167 @@ select.softFlowSelect {
     width: 100%;
 }
 
-input {
+.mainPage {
+    min-height: 300px;
+    padding: 40px;
+    background: linear-gradient(to bottom, hsla(0, 0%, 100%, 0.4), hsla(0, 0%, 100%, 1)), linear-gradient(to left, hsla(191, 100%, 91%, 1), hsla(77, 100%, 91%, 1));
+}
+
+.sortButton {
     display: inline-block;
-    width: 80%;
-    margin-bottom: 20px;
+    margin: 0 2% 0 2%;
+    padding: 0px 20px 0px 20px;
+    border: solid #839192 4px;
+    border-radius: 20%;
+    background-color: #FAFAFA;
+}
+
+@media screen and (max-width: 2000px) {
+    input {
+        display: inline-block;
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .settingsPanel {
+        position: relative;
+        top: -40px;
+        padding-top: 40px;
+        float: left;
+        width: 20%;
+        text-align: center;
+    }
+
+    .settingsPanelBox {
+        position: absolute;
+        width: 25%;
+        height: 100%;
+        z-index: 0;
+        top: -40px;
+        box-shadow: 10px 0px 0.5em #787878;
+    }
+    .sortViewsContainer {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        float: left;
+        width: 80%;
+    }
+
+    .settingsPanel {
+        font-size: 20px;
+    }
+    .button {
+        top: 30px;
+        width: 70px;
+    }
+    .sprite-reset {
+        margin: 2px 0 2px 0;
+    }
+    .sprite-play {
+        margin: 2px 0 2px 0;
+    }
+}
+@media (max-width: 1160px) { /*mobile*/
+    input {
+        display: inline-block;
+        width: 70%;
+        margin-bottom: 30px;
+    }
+
+    .settingsPanel {
+        position: relative;
+        top: -40px;
+        padding-top: 40px;
+        float: top;
+        width: 100%;
+        text-align: center;
+
+    }
+
+    .settingsPanelBox {
+        position: absolute;
+        width: 0%;
+        height: 0%;
+        z-index: 0;
+        top: -40px;
+        box-shadow: 0;
+    }
+    .sortViewsContainer {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        float: bottom;
+        width: 100%;
+    }
+
+    .settingsPanel {
+        font-size: 25px;
+    }
+    .button {
+        top: 10px;
+        width: 120px;
+    }
+    canvas {
+        width: 800px;
+        height: 800px;
+    }
+    .sprite-reset {
+        margin: 15px 0 15px 0;
+    }
+    .sprite-play {
+        margin: 15px 0 15px 0;
+    }
+}
+
+#roundView {
+    background-image: url("roundview.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100px;
+    width: 100px;
+    height: 100px;
+}
+
+#gradientView {
+    background-image: url("gradientview.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100px;
+    width: 100px;
+    height: 100px;
+}
+
+#classicView {
+    background-image: url("classicview.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100px;
+    width: 100px;
+    height: 100px;
+}
+
+.sortButton:hover {
+    background-color: hsla(142, 81%, 83%, 1);
+}
+.buttonContainer {
+    display: inline-block;
+    margin-top: 30px;
+    vertical-align: middle;
+    text-align: center;
+    float: left;
+    width: 100%;
+}
+
+.button {
+    background-repeat: no-repeat;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 3% 0 3%;
+    background-color: #FAFAFA;
+    border: solid #839192 3px;
+    border-radius: 5px;
 }
 
 .resetButton:active {
@@ -169,6 +222,30 @@ input {
 .resetButton {
     background: linear-gradient(hsla(70, 64%, 87%, 1), hsla(70, 64%, 57%, 1));
 }
+
+.sprite-reset {
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url(spritesheet.png);
+    width: 30px;
+    height: 30px;
+    background-position: -5px -85px;
+}
+
+.sprite-play {
+    display: inline-block;
+    background-image: url(spritesheet.png);
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    background-position: -60px -45px;
+}
+
+/*.sprite-fb {*/
+/*width: 45px;*/
+/*height: 45px;*/
+/*background-position: -5px -5px;*/
+/*}*/
 
 
 

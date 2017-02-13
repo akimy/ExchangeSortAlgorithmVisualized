@@ -1,32 +1,42 @@
-// global var declaration
+// global vars declaration
+// global vars declaration
 
-var radiusValue =  +document.getElementById("sphereRadius").value;
+// sort state
+var playing = false;
+
+//canvas pic & audio
 var audio = new (window.AudioContext || window.webkitAudioContext)();
+var volControl = document.getElementById("volume");
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-var volControl = document.getElementById("volume");
+var canvasSize = 900;
+
+
+//sphere radius global vars for RoundView
+var radiusValue =  +document.getElementById("sphereRadius").value;
+var diffRadiusValue = 0;
+
+var colors = ["#839192", "#80ffbf", "#566573", "#ff8080", "#00cc00", "#006600", "#c2d6d6"];
+var colorPick = 3;
+
 var sortView = "roundView";
 document.getElementById("roundView").style.backgroundColor = "hsla(163, 81%, 80%, 1)";
-var colors = ["#839192", "#80ffbf", "#566573", "#ff8080", "#00cc00", "#006600", "#c2d6d6"];
-var arrayLevel = 0;
-var arrayLevelLow = 0;
-var colorPick = 3;
-var drawing = 0;
-var direction = true;
-var time = 0;
-var playing = false;
-var sortType ="combSort";
-var diffRadiusValue = 0;
-//
 document.styleSheets[0].insertRule('#firstButton:active {background: linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1)); }', 0);
 document.styleSheets[0].insertRule('#firstButton {background: linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1));}', 1);
 
-// vars 4 change
-var canvasSize = 900;
+// additional sort state global vars & starting vars
+var arrayLevel = 0;
+var arrayLevelLow = 0;
+var drawing = 0;
+var direction = true;
+var time = 0;
+var sortType ="combSort";
 var array = [];
+var step = 0;
 
 calcNewArray();
 resetImage();
+
 
 function resetButton() {
     ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
@@ -42,16 +52,16 @@ function startButton() {
     if (!playing) {
         playing = true;
         document.getElementsByClassName("sprite-play")[0].style.backgroundPosition = "-60px -5px";
-        initSort();
         document.styleSheets[0].cssRules[1].style.background= "linear-gradient(hsla(0, 64%, 87%, 1), hsla(0, 64%, 57%, 1))";
         document.styleSheets[0].cssRules[0].style.background = 'linear-gradient(hsla(0, 64%, 57%, 1), hsla(0, 64%, 87%, 1))';
+        initSort();
     } else {
         playing = false;
         document.styleSheets[0].cssRules[1].style.background = "linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1))";
-        clearInterval(drawing);
-        resetImage();
         document.getElementsByClassName("sprite-play")[0].style.backgroundPosition = "-60px -45px";
         document.styleSheets[0].cssRules[0].style.background = 'linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1))';
+        clearInterval(drawing);
+        resetImage();
     }
 }
 
@@ -71,13 +81,14 @@ function changeRadius() {
     resetImage();
 }
 
+// easy way to instantly clear & repaint sort image on the screen
 function resetImage () {
     ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
     if (sortView == "roundView") {
         drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
     }
     drawArray(array);
-        }
+}
 
 function calcNewArray() {
     array=[];
@@ -87,17 +98,18 @@ function calcNewArray() {
     for (var i = 0; i < array.length; i++) {
         array[i] =  array[i] * ((i)*((0.64/array.length))) + 90;
     }
-
     var compareRandom = function() {
         return Math.random() - 0.5;
     };
     array.sort(compareRandom);
+
     step = array.length-2;
-    resetImage();
     time = 0;
     direction = true;
+    resetImage();
 }
 
+// sound & soundwave shape
 function startOsc(freq) {
     var attack = 25,
         decay = 50,
@@ -107,7 +119,6 @@ function startOsc(freq) {
     gain.gain.setValueAtTime(0, audio.currentTime);
     gain.gain.linearRampToValueAtTime(volControl.value, audio.currentTime + attack / 700);
     gain.gain.linearRampToValueAtTime(0, audio.currentTime + decay / 700);
-
     osc.frequency.value = (freq+100)*1.4;
     osc.type = "square";
     osc.connect(gain);
@@ -203,45 +214,46 @@ function lineFunction(pommel, radCord, color, radius) {
         }
     }
     if (sortView == "gradientView") {
+        var gradientValue = canvasSize/array.length + 50;
         ctx.lineWidth = canvasSize / array.length;
         if (time > 1) {
             ctx.strokeStyle = colors[2];
             ctx.beginPath();
             if (sortType == "combSort") {
-                ctx.moveTo((time - 1) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300);
-                ctx.lineTo((time - 1)* (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
+                ctx.moveTo((time - 1) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300);
+                ctx.lineTo((time - 1)* (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
             }
             if (sortType == "bubbleSort") {
-                ctx.moveTo((time - 1) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300);
-                ctx.lineTo((time - 1)* (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
+                ctx.moveTo((time - 1) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300);
+                ctx.lineTo((time - 1)* (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
             }
             if (sortType == "cocktailSort") {
                 if (direction) {
-                    ctx.moveTo((time - 1) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300);
-                    ctx.lineTo((time - 1) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
+                    ctx.moveTo((time - 1) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300);
+                    ctx.lineTo((time - 1) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
                 } else {
-                    ctx.moveTo((time + 2) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300);
-                    ctx.lineTo((time + 2) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
+                    ctx.moveTo((time + 2) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300);
+                    ctx.lineTo((time + 2) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
                 }
             }
             ctx.stroke();
 
             ctx.beginPath();
             if (sortType == "combSort") {
-                ctx.moveTo((time + step - 1) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300);
-                ctx.lineTo((time + step - 1) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
+                ctx.moveTo((time + step - 1) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300);
+                ctx.lineTo((time + step - 1) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
             }
             if (sortType == "bubbleSort") {
-                ctx.moveTo((time) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300);
-                ctx.lineTo((time) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
+                ctx.moveTo((time) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300);
+                ctx.lineTo((time) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
             }
             if (sortType == "cocktailSort") {
                 if (direction) {
-                    ctx.moveTo(time * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300);
-                    ctx.lineTo(time * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
+                    ctx.moveTo(time * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300);
+                    ctx.lineTo(time * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
                 } else {
-                    ctx.moveTo((time + 1) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300);
-                    ctx.lineTo((time + 1) * (canvasSize * 0.9 / array.length) + 70, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
+                    ctx.moveTo((time + 1) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300);
+                    ctx.lineTo((time + 1) * (canvasSize * 0.8 / array.length) + gradientValue, canvasSize / 2 - 300 - canvasSize * 0.8 / array.length);
                 }
             }
                 ctx.stroke();
@@ -249,8 +261,8 @@ function lineFunction(pommel, radCord, color, radius) {
         ctx.strokeStyle = "hsla( 199, 17%, "+100*array[radCord]/300+"%, 1)";
         if (!pommel) {
             ctx.beginPath();
-            ctx.moveTo(radCord * (canvasSize*0.9 / array.length)+70, canvasSize/2);
-            ctx.lineTo(radCord * (canvasSize*0.9 / array.length)+70, canvasSize/2 - 300);
+            ctx.moveTo(radCord * (canvasSize*0.8 / array.length)+canvasSize/array.length + 50, canvasSize/2);
+            ctx.lineTo(radCord * (canvasSize*0.8 / array.length)+canvasSize/array.length + 50, canvasSize/2 - 300);
             ctx.stroke();
         }
     }
@@ -458,7 +470,7 @@ function terminateProgram() {
         }
     }
     i = 0;
-    var finishDrawing = setInterval(function() {
+    var finishDrawing = setInterval(function() { // Last green-style check 
         if (i < array.length) {
             startOsc(array[i]);
             lineFunction(false, i, colors[1], +document.getElementById("sphereRadius").value);
@@ -481,6 +493,6 @@ function terminateProgram() {
             // Program shutdown!
         }
         i++;
-    }, Math.abs(+document.getElementById("codeSpeed").value-200)*0.7); // Last green-style speed
+    }, Math.abs(+document.getElementById("codeSpeed").value-200)*0.7);
 }
 
