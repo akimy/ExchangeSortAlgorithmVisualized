@@ -18,8 +18,7 @@ var playing = false;
 var sortType ="combSort";
 var diffRadiusValue = 0;
 //
-document.styleSheets[0].insertRule('#firstButton:active {' +
-    'background: linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1)); }', 0);
+document.styleSheets[0].insertRule('#firstButton:active {background: linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1)); }', 0);
 document.styleSheets[0].insertRule('#firstButton {background: linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1));}', 1);
 
 // vars 4 change
@@ -266,8 +265,9 @@ function initSort() {
 function changeSortType() {
     clearInterval(drawing);
     resetImage();
-    playing = true;
-    resetButton();
+    if (playing) {
+        startButton();
+    }
     sortType = document.forms[0].elements[0].value;
     clearInterval(drawing);
 }
@@ -473,7 +473,11 @@ function terminateProgram() {
             clearInterval(finishDrawing);
             arrayLevel = 0;
             arrayLevelLow = 0;
-            document.getElementById("StartButton").value = "Play";
+            playing = false;
+            document.styleSheets[0].cssRules[1].style.background = "linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1))";
+            document.getElementsByClassName("sprite-play")[0].style.backgroundPosition = "-60px -45px";
+            document.styleSheets[0].cssRules[0].style.background = 'linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1))';
+
             // Program shutdown!
         }
         i++;

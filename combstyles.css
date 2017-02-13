@@ -13,6 +13,7 @@ header.page-header {
     color: white;
     background-color: #2e2c3e;
     box-shadow: 0 0 5px 0 #333333;
+    font-family: Tahoma, Geneva, sans-serif;
 }
 
 body {
@@ -41,8 +42,24 @@ footer.page-footer {
 
 .settingsPanel {
    /*background-color: #EA2663;*/
+    font-size: 20px;
+    position: relative;
+    top: -40px;
+    padding-top: 40px;
     float: left;
     width: 20%;
+    text-align: center;
+
+}
+
+.settingsPanelBox {
+    position: absolute;
+    z-index: 0;
+    top: -40px;
+    height: 1300px;
+    width: 20%;
+    box-shadow: 10px 0px 0.5em #787878;
+
 }
 .sortViewsContainer {
     /*background-color: #F9D7FF;*/
@@ -112,17 +129,6 @@ footer.page-footer {
     background-position: -5px -85px;
 }
 
-.borderMove {
-     height: 36px;
-     width: 71px;
-     position: absolute;
-     top: -3px;
-     left: -3px;
-     z-index: 2;
-     border: solid #a8b5e9 2px;
-     border-radius: 5px;
-
- }
 /*.button:hover {*/
     /*box-shadow: -5px -5px 0.1em #0e1b1d;*/
 /*}*/
@@ -131,7 +137,30 @@ footer.page-footer {
 /*.playButton {*/
     /*background: linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1));*/
 /*}*/
+label.label {
+    display: block;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
 
+select.softFlowSelect {
+    border: 1px solid #AAA;
+    color: #555;
+    font-size: inherit;
+    margin: 0px;
+
+    padding: 5px 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+input {
+    display: inline-block;
+    width: 80%;
+    margin-bottom: 20px;
+}
 
 .resetButton:active {
     background: linear-gradient(hsla(70, 64%, 57%, 1), hsla(70, 64%, 81%, 1));
