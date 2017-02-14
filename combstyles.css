@@ -53,7 +53,7 @@ select.softFlowSelect {
 }
 
 .mainPage {
-    min-height: 300px;
+    min-height: 600px;
     padding: 40px;
     background: linear-gradient(to bottom, hsla(0, 0%, 100%, 0.4), hsla(0, 0%, 100%, 1)), linear-gradient(to left, hsla(191, 100%, 91%, 1), hsla(77, 100%, 91%, 1));
 }

@@ -5,34 +5,32 @@
 var playing = false;
 
 //canvas pic & audio
-var audio = new (window.AudioContext || window.webkitAudioContext)();
-var volControl = document.getElementById("volume");
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-var canvasSize = 900;
-
+var audio = new (window.AudioContext || window.webkitAudioContext)(),
+    volControl = document.getElementById("volume"),
+    canvas = document.getElementById("canvas"),
+    ctx = canvas.getContext("2d"),
+    canvasSize = 900;
 
 //sphere radius global vars for RoundView
-var radiusValue =  +document.getElementById("sphereRadius").value;
-var diffRadiusValue = 0;
+var radiusValue =  +document.getElementById("sphereRadius").value,
+    diffRadiusValue = 0;
 
-var colors = ["#839192", "#80ffbf", "#566573", "#ff8080", "#00cc00", "#006600", "#c2d6d6"];
-var colorPick = 3;
-
-var sortView = "roundView";
+var colors = ["#839192", "#80ffbf", "#566573", "#ff8080", "#00cc00", "#006600", "#c2d6d6"],
+    colorPick = 3,
+    sortView = "roundView";
 document.getElementById("roundView").style.backgroundColor = "hsla(163, 81%, 80%, 1)";
 document.styleSheets[0].insertRule('#firstButton:active {background: linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1)); }', 0);
 document.styleSheets[0].insertRule('#firstButton {background: linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1));}', 1);
 
 // additional sort state global vars & starting vars
-var arrayLevel = 0;
-var arrayLevelLow = 0;
-var drawing = 0;
-var direction = true;
-var time = 0;
-var sortType ="combSort";
-var array = [];
-var step = 0;
+var arrayLevel = 0,
+    arrayLevelLow = 0,
+    drawing = 0,
+    direction = true,
+    time = 0,
+    sortType ="combSort",
+    array = [],
+    step = 0;
 
 calcNewArray();
 resetImage();
