@@ -166,7 +166,7 @@ select.softFlowSelect {
 }
 
 #roundView {
-    background-image: url("docs/roundview.png");
+    background-image: url("roundview.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100px;
@@ -175,7 +175,7 @@ select.softFlowSelect {
 }
 
 #gradientView {
-    background-image: url("docs/gradientview.png");
+    background-image: url("gradientview.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100px;
@@ -184,7 +184,7 @@ select.softFlowSelect {
 }
 
 #classicView {
-    background-image: url("docs/classicview.png");
+    background-image: url("classicview.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100px;
