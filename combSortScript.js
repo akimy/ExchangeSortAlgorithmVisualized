@@ -1,11 +1,10 @@
-// global vars declaration
-// global vars declaration
+// global vars:
 
 // sort state
 var playing = false;
 
-//canvas pic & audio
-var audio = new (window.AudioContext || window.webkitAudioContext)(),
+//canvas pics & audio prep.
+var audio = new AudioContext(),
     volControl = document.getElementById("volume"),
     canvas = document.getElementById("canvas"),
     ctx = canvas.getContext("2d"),
@@ -18,19 +17,23 @@ var radiusValue =  +document.getElementById("sphereRadius").value,
 var colors = ["#839192", "#80ffbf", "#566573", "#ff8080", "#00cc00", "#006600", "#c2d6d6"],
     colorPick = 3,
     sortView = "roundView";
+
 document.getElementById("roundView").style.backgroundColor = "hsla(163, 81%, 80%, 1)";
-document.styleSheets[0].insertRule('#firstButton:active {background: linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1)); }', 0);
-document.styleSheets[0].insertRule('#firstButton {background: linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1));}', 1);
+document.getElementById("firstButton").style.background = "linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1))";
+
 
 // additional sort state global vars & starting vars
-var arrayLevel = 0,
+var array = [],
+    arrayLevel = 0,
     arrayLevelLow = 0,
-    drawing = 0,
     direction = true,
     time = 0,
     sortType ="combSort",
-    array = [],
-    step = 0;
+    step = 0,
+    drawing = 0;
+
+
+// |BEWARE|   Some terrible code below   /╲/\╭[☉﹏☉]╮/\╱\
 
 calcNewArray();
 resetImage();
@@ -46,18 +49,24 @@ function resetButton() {
     resetImage();
 }
 
+function mouseDown() {
+    if (playing) {
+        document.getElementById("firstButton").style.background = "linear-gradient(hsla(0, 64%, 57%, 1), hsla(0, 64%, 87%, 1))";
+    } else {
+        document.getElementById("firstButton").style.background = "linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 87%, 1))";
+    }
+}
+
 function startButton() {
     if (!playing) {
         playing = true;
         document.getElementsByClassName("sprite-play")[0].style.backgroundPosition = "-60px -5px";
-        document.styleSheets[0].cssRules[1].style.background= "linear-gradient(hsla(0, 64%, 87%, 1), hsla(0, 64%, 57%, 1))";
-        document.styleSheets[0].cssRules[0].style.background = 'linear-gradient(hsla(0, 64%, 57%, 1), hsla(0, 64%, 87%, 1))';
+        document.getElementById("firstButton").style.background = "linear-gradient(hsla(0, 64%, 87%, 1), hsla(0, 64%, 57%, 1))";
         initSort();
     } else {
         playing = false;
-        document.styleSheets[0].cssRules[1].style.background = "linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1))";
         document.getElementsByClassName("sprite-play")[0].style.backgroundPosition = "-60px -45px";
-        document.styleSheets[0].cssRules[0].style.background = 'linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1))';
+        document.getElementById("firstButton").style.background = "linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1))";
         clearInterval(drawing);
         resetImage();
     }
@@ -88,19 +97,25 @@ function resetImage () {
     drawArray(array);
 }
 
+function compareRandom(array) {
+    var j, x;
+    for (var i = array.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = array[i - 1];
+        array[i - 1] = array[j];
+        array[j] = x;
+    }
+}
+
 function calcNewArray() {
     array=[];
     for (var i = 0; i < +document.getElementById("elementsNumb").value; i++) {
         array.push(Math.round(( (canvasSize/2) - (+document.getElementById("sphereRadius").value) - 60)));
     }
-    for (var i = 0; i < array.length; i++) {
+    for (i = 0; i < array.length; i++) {
         array[i] =  array[i] * ((i)*((0.64/array.length))) + 90;
     }
-    var compareRandom = function() {
-        return Math.random() - 0.5;
-    };
-    array.sort(compareRandom);
-
+    compareRandom(array);
     step = array.length-2;
     time = 0;
     direction = true;
@@ -110,7 +125,7 @@ function calcNewArray() {
 // sound & soundwave shape
 function startOsc(freq) {
     var attack = 25,
-        decay = 50,
+        decay = 60,
         gain = audio.createGain(),
         osc = audio.createOscillator();
     gain.connect(audio.destination);
@@ -303,6 +318,8 @@ function changeSortView(view) {
 function sort() {
     ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
 
+    // **************// comb sort code & conditions //************************************************//
+
     if (sortType === "combSort") {
         if (array[time] > array[time+step]) {
             colorPick = 3;
@@ -313,7 +330,7 @@ function sort() {
         if (sortView == "roundView") {
             drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
         }
-        if (time + step >= array.length) { // comb sort code & conditions
+        if (time + step >= array.length) {
             time = 0;
             step = (step == 1) ? step : Math.floor(step / 1.25);
         }
@@ -341,6 +358,7 @@ function sort() {
         } else {
             time = 0;}
     }
+    // *******// stupid-style bubble sort & conditions //*************//
 
     if (sortType === "bubbleSort") {
 
@@ -355,7 +373,7 @@ function sort() {
             drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
         }
 
-        if (arrayLevel > array.length) { // stupid-style bubble sort & conditions
+        if (arrayLevel > array.length) {
             terminateProgram();
         }
 
@@ -383,8 +401,9 @@ function sort() {
         } else {
             time = 0;}
     }
+    // ********************// cocktail shaker sort //*********************************//
 
-    if (sortType === "cocktailSort") { //  cocktail shaker sort
+    if (sortType === "cocktailSort") { //
         if (arrayLevel+arrayLevelLow > array.length) {
             terminateProgram();
         }
@@ -484,9 +503,9 @@ function terminateProgram() {
             arrayLevel = 0;
             arrayLevelLow = 0;
             playing = false;
-            document.styleSheets[0].cssRules[1].style.background = "linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1))";
             document.getElementsByClassName("sprite-play")[0].style.backgroundPosition = "-60px -45px";
-            document.styleSheets[0].cssRules[0].style.background = 'linear-gradient(hsla(136, 64%, 57%, 1), hsla(136, 64%, 81%, 1))';
+            document.getElementById("firstButton").style.background = "linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1))";
+            console.log("Array with " + array.length + " elements was completely sorted via " + sortType + " technique!" );
 
             // Program shutdown!
         }
