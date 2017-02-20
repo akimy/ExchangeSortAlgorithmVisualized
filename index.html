@@ -13,7 +13,7 @@
 <header class = "page-header" role = "banner">Sort algorithm visualization</header>
 <div class="mainPage" role="main">
 
-
+    <!--settings & ranges -->
     <div class="settingsPanel">
     <form>
         <label class="label">Chose sort algorithm type:</label><br>
@@ -43,7 +43,7 @@
         <div class="sortButton transition" id = "classicView" onclick="changeSortView('classicView')"></div>
         <div class="sortButton transition" id = "gradientView" onclick="changeSortView('gradientView')"></div><br>
             <div class="buttonContainer">
-                <div class="playButton button transition" id = "firstButton" onclick="startButton()">
+                <div class="playButton button transition" id = "firstButton" onmousedown="mouseDown()" onclick="startButton()">
                     <div class="sprite-play"></div>
                 </div>
                 <div class="resetButton button transition" onclick="resetButton()">
@@ -55,6 +55,7 @@
         </div>
     </div>
     <!----->
+
 </div>
 <footer class=page-footer>
     Alexander Vaganov <br>
