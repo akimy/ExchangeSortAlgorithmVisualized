@@ -1,7 +1,7 @@
 # Exchange sort algorithmVisualisations via JS
 Here comb sort, Bubble sort & Cocktail Shake sort visualized via 3 graph. methods.
 
-demo: https://arvaganov.github.io/
+run index.html file 4 take exp.
 correct work in Chrome, MF (recomended) & Safari
 
 <b>Bubble sort</b>, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list to be sorted, compares each pair of adjacent items and swaps them if they are in the wrong order. The pass through the list is repeated until no swaps are needed, which indicates that the list is sorted. The algorithm, which is a comparison sort, is named for the way smaller or larger elements "bubble" to the top of the list. Although the algorithm is simple, it is too slow and impractical for most problems even when compared to insertion sort. It can be practical if the input is usually in sorted order but may occasionally have some out-of-order elements nearly in position.<a href = https://en.wikipedia.org/wiki/Bubble_sort>[1]</a>
