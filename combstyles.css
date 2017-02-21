@@ -69,8 +69,8 @@ select.softFlowSelect {
 
 @media screen and (max-width: 2000px) {
     canvas {
-        width: 800px;
-        height: 800px;
+        width: 1000px;
+        height: 1000px;
     }
     input {
         display: inline-block;
