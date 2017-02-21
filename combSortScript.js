@@ -40,7 +40,6 @@ resetImage();
 
 
 function resetButton() {
-    ctx.clearRect(10, 10, canvasSize-20, canvasSize-20);
     calcNewArray();
     if (sortView == "roundView") {
         drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
