@@ -15,8 +15,8 @@ var radiusValue =  +document.getElementById("sphereRadius").value,
     diffRadiusValue = 0;
 
 var colors = ["#839192", "#80ffbf", "#566573", "#ff8080", "#00cc00", "#006600", "#c2d6d6"],
-    colorPick = 3,
-    sortView = "roundView";
+    colorPick = 3;
+
 
 document.getElementById("roundView").style.backgroundColor = "hsla(163, 81%, 80%, 1)";
 document.getElementById("firstButton").style.background = "linear-gradient(hsla(136, 64%, 87%, 1), hsla(136, 64%, 57%, 1))";
@@ -30,7 +30,8 @@ var array = [],
     time = 0,
     sortType ="combSort",
     step = 0,
-    drawing = 0;
+    drawing = 0,
+    sortView = "roundView";
 
 
 // |BEWARE|   Some terrible code below   /╲/\╭[☉﹏☉]╮/\╱\
@@ -39,10 +40,6 @@ calcNewArray();
 
 function resetButton() {
     calcNewArray();
-    if (sortView == "roundView") {
-        drawCircle(+document.getElementById("sphereRadius").value, colors[6]);
-    }
-    drawArray(array);
     resetImage();
 }
 
@@ -112,10 +109,10 @@ function calcNewArray() {
     for (i = 0; i < array.length; i++) {
         array[i] =  array[i] * ((i)*((0.64/array.length))) + 90;
     }
-    compareRandom(array);
     step = array.length-2;
     time = 0;
     direction = true;
+    compareRandom(array);
     resetImage();
 }
 
