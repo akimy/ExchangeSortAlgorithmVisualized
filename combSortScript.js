@@ -36,8 +36,6 @@ var array = [],
 // |BEWARE|   Some terrible code below   /╲/\╭[☉﹏☉]╮/\╱\
 
 calcNewArray();
-resetImage();
-
 
 function resetButton() {
     calcNewArray();
