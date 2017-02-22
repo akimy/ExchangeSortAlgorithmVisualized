@@ -1,4 +1,4 @@
-# Exchange sort algorithmVisualisations via JS
+# Exchange sort algorithmVisualisations via JavaScript
 Here comb sort, Bubble sort & Cocktail Shake sort visualized via 3 graph. methods.
 
 run index.html file 4 take exp.
