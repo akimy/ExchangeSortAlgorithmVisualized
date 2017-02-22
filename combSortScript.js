@@ -38,11 +38,6 @@ var array = [],
 
 calcNewArray();
 
-function resetButton() {
-    calcNewArray();
-    resetImage();
-}
-
 function mouseDown() {
     if (playing) {
         document.getElementById("firstButton").style.background = "linear-gradient(hsla(0, 64%, 57%, 1), hsla(0, 64%, 87%, 1))";
@@ -342,7 +337,6 @@ function sort() {
             startOsc(array[time+step]);
             startOsc(array[time]);
 
-
             if (array[time] > array[time+step]) {
                 var temp = array[time];
                 array[time] = array[time+step];
@@ -383,7 +377,6 @@ function sort() {
 
             startOsc(array[time]);
             startOsc(array[time+1]);
-
 
             if (array[time] > array [time+1]) {
                 var temp = array[time+1];
