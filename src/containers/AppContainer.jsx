@@ -4,10 +4,11 @@ class AppContainer extends Component {
   render() {
     return (
       <div>
-        Sample
+        asds
       </div>
     );
   }
 }
 
 export default AppContainer;
+

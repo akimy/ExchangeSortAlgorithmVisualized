@@ -2,9 +2,8 @@ import React from 'react';
 
 const App = () => (
   <div>
-      Stateless
+      stateless
   </div>
 );
 
 export default App;
-
