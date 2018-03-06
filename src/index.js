@@ -5,5 +5,7 @@ import AppContainer from './containers/AppContainer';
 render(
   /*eslint-disable*/
   <AppContainer />,
-  document.getElementById('app'),
+  document.querySelector('.app'),
 );
+
+module.hot.accept();
