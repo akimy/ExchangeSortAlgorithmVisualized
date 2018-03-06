@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import AppContainer from './containers/AppContainer';
 
 render(
+  /*eslint-disable*/
   <AppContainer />,
   document.getElementById('app'),
 );
