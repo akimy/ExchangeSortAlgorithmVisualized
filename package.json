@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "node_modules/.bin/eslint . --format codeframe",
     "dev": "webpack-dev-server --config ./webpack.config.js --mode development",
-    "build": "webpack --mode production ./src/index.js --output ./dist/bundle.js"
+    "build": "webpack --config ./webpack.config.js --mode production ./src/index.js --output ./dist/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,8 @@
     "material-ui": "^0.20.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "styled-components": "^3.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -36,6 +37,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "file-loader": "^1.1.11",
     "react-hot-loader": "^4.0.0",
     "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^4.1.0",

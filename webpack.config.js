@@ -12,6 +12,13 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'images/[name].[ext]',
+        },
+      },
     ],
   },
   resolve: {
@@ -19,7 +26,7 @@ module.exports = {
   },
   output: {
     path: `${__dirname}/dist`,
-    publicPath: '/',
+    publicPath: '',
     filename: 'bundle.js',
   },
   devServer: {
